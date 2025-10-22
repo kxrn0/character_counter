@@ -1,0 +1,35 @@
+@mixin radius-full {
+  border-radius: 69rem;
+}
+
+@mixin radius-24 {
+  border-radius: 1.5rem;
+}
+
+@mixin radius-20 {
+  border-radius: 1.25rem;
+}
+
+@mixin radius-16 {
+  border-radius: 1rem;
+}
+
+@mixin radius-12 {
+  border-radius: 0.75rem;
+}
+
+@mixin radius-10 {
+  border-radius: 0.625rem;
+}
+
+@mixin radius-8 {
+  border-radius: 0.5rem;
+}
+
+@mixin radius-6 {
+  border-radius: 0.375rem;
+}
+
+@mixin radius-4 {
+  border-radius: 0.25rem;
+}

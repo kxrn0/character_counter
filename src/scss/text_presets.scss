@@ -1,0 +1,67 @@
+@supports (font-variation-settings: normal) {
+  @font-face {
+    font-family: dm-sans;
+    src: url("../assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
+    font-weight: 100 1000;
+  }
+}
+
+@supports not (font-variation-settings: normal) {
+  @font-face {
+    font-family: dm-sans;
+    src: url("../assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: dm-sans;
+    src: url("../assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: dm-sans;
+    src: url("../assets/fonts/DM_Sans/static/DMSans-Bold.ttf");
+    font-weight: 700;
+  }
+}
+
+@mixin text-preset-1 {
+  font-family: dm-sans;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 100%;
+  letter-spacing: -0.0625rem;
+}
+
+@mixin text-preset-1-mobile {
+  font-family: dm-sans;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 100%;
+  letter-spacing: -0.0625rem;
+}
+
+@mixin text-preset-2 {
+  font-family: dm-sans;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 130%;
+  letter-spacing: -0.0625rem;
+}
+
+@mixin text-preset-3 {
+  font-family: dm-sans;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 140%;
+  letter-spacing: -0.0375rem;
+}
+
+@mixin text-preset-4 {
+  font-family: dm-sans;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 130%;
+  letter-spacing: -0.0375rem;
+}

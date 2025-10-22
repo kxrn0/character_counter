@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neutral-900: #12131a;
+  --neutral-800: #21222c;
+  --neutral-700: #2a2b37;
+  --neutral-600: #404254;
+  --neutral-200: #e4e4ef;
+  --neutral-100: #f2f2f7;
+  --neutral-0: white;
+
+  --purple-400: #d3a0fa;
+  --purple-500: #c27cf8;
+
+  --yellow-500: #ff9f00;
+
+  --orange-500: #fe8159;
+  --orange-800: #da3701;
+
+  background-size: cover;
+  background-position: center;
+}
+
+:root.light {
+  --background-texture: url("./assets/images/bg-light-theme.png");
+}
+
+:root.dark {
+  --background-texture: url("./assets/images/bg-dark-theme.png");
+}
+
+body {
+  background: var(--background-texture);
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+}
