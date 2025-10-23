@@ -1,36 +1,21 @@
 <script setup lang="ts">
-import { computed, provide, ref } from "vue";
-import { themeKey } from "./injection_keys";
-import useTheme from "./composables/useTheme";
+import { computed, ref } from "vue";
+import useTheme from "@/composables/useTheme";
+import count_chars from "./utils_app/count_chars";
+import count_words from "./utils_app/count_words";
 import Navbar from "./components/NavBar.vue";
-import TextArea from "./components/TextArea.vue";
-import TextStats from "./components/TextStats.vue";
+import TextArea from "./components/TextArea/TextArea.vue";
+import TextStats from "./components/TextStats/TextStats.vue";
 
 const themeManager = useTheme();
 const text = ref("");
 const excludeSpaces = ref(false);
 const charCount = computed(() => count_chars(text.value, excludeSpaces.value));
 const wordCount = computed(() => count_words(text.value));
-
-function count_chars(text: string, excludeSpaces: boolean) {
-  if (excludeSpaces === false) return text.length;
-
-  let count = 0;
-
-  for (const char of text) if (/\s/.test(char) === false) count++;
-
-  return count;
-}
-
-function count_words(text: string) {
-  return text.split(/\s+/).filter((word) => word !== "").length;
-}
-
-provide(themeKey, themeManager);
 </script>
 
 <template>
-  <Navbar />
+  <Navbar :theme-manager />
   <main class="app-container" :class="themeManager.theme.value">
     <h1 class="title">
       Analyze your text <br class="brazil-desktop" />
@@ -42,9 +27,10 @@ provide(themeKey, themeManager);
       :char-count
       :word-count
       :exclude-spaces
+      :theme="themeManager.theme.value"
       @toggle="excludeSpaces = !excludeSpaces"
     />
-    <TextStats :text :char-count :exclude-spaces :word-count />
+    <TextStats :text :char-count :exclude-spaces :word-count :theme="themeManager.theme.value" />
   </main>
 </template>
 

@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import type { Theme } from "@/types";
 import patterChar from "@/assets/images/pattern-character-count.svg";
 import patternWord from "@/assets/images/pattern-word-count.svg";
 import patternSent from "@/assets/images/pattern-sentence-count.svg";
-import LetterDensity from "./LetterDensity.vue";
+import LetterDensity from "./components_text_stats/LetterDensity.vue";
+import count_sentences from "./utils_text_stats/count_sentences";
 
 const props = defineProps<{
   text: string;
   charCount: number;
   excludeSpaces: boolean;
   wordCount: number;
+  theme: Theme;
 }>();
-const sentenceCount = computed(() =>
-  props.text
-    .split(/(?<=[.?!])\s+/)
-    .filter((s) => s.trim() !== "")
-    .length.toString()
-    .padStart(2, "0"),
-);
+const sentenceCount = computed(() => count_sentences(props.text));
 </script>
 
 <template>
@@ -26,7 +23,9 @@ const sentenceCount = computed(() =>
       <div class="card char">
         <img class="decorative-image" :src="patterChar" alt="" />
         <p class="title">{{ props.charCount.toString().padStart(2, "0") }}</p>
-        <p class="subtitle">Total Characters <span v-if="props.excludeSpaces">(no spaces)</span></p>
+        <p class="subtitle">
+          Total Characters <span class="no-spaces" v-if="props.excludeSpaces">(no spaces)</span>
+        </p>
       </div>
       <div class="card word">
         <img class="decorative-image" :src="patternWord" alt="" />
@@ -39,7 +38,7 @@ const sentenceCount = computed(() =>
         <p class="subtitle">Sentence Count</p>
       </div>
     </div>
-    <LetterDensity :text="props.text" />
+    <LetterDensity :text="props.text" :theme="props.theme" />
   </div>
 </template>
 
@@ -113,6 +112,18 @@ const sentenceCount = computed(() =>
         .decorative-image {
           left: 9rem;
         }
+
+        .subtitle {
+          position: relative;
+
+          .no-spaces {
+            @include text_presets.text-preset-6;
+
+            position: absolute;
+            top: 100%;
+            left: 0;
+          }
+        }
       }
     }
   }
@@ -132,6 +143,16 @@ const sentenceCount = computed(() =>
 
         .title {
           @include text_presets.text-preset-1-mobile;
+        }
+
+        .subtitle {
+          position: static;
+
+          .no-spaces {
+            @include text_presets.text-preset-3;
+
+            position: static;
+          }
         }
       }
     }

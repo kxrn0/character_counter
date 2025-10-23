@@ -1,48 +1,52 @@
-# .
+# Character counter
 
-This template should help get you started developing with Vue 3 in Vite.
+## Table of contents
 
-## Recommended IDE Setup
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+- [Author](#author)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Overview
 
-## Recommended Browser Setup
+### The challenge
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Users should be able to:
 
-## Type Support for `.vue` Imports in TS
+- Analyze the character, word, and sentence counts for their text
+- Exclude/Include spaces in their character count
+- Set a character limit
+- Receive a warning message if their text exceeds their character limit
+- See the approximate reading time of their text
+- Analyze the letter density of their text
+- Select their color theme
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Screenshot
 
-## Customize configuration
+![screenshot](./screenshot.png)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Links
 
-## Project Setup
+- [Solution](https://github.com/kxrn0/character_counter)
+- [Live](https://kxrn0.github.io/character_counter/)
 
-```sh
-pnpm install
-```
+## My process
 
-### Compile and Hot-Reload for Development
+### Built with
 
-```sh
-pnpm dev
-```
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- [Typescript](https://www.typescriptlang.org/)
+- [Vue](https://vuejs.org/)
+- [Sass](https://sass-lang.com/)
+- [Vite PWA plugin](https://vite-pwa-org.netlify.app/)
 
-### Type-Check, Compile and Minify for Production
+## Author
 
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+kxrn0 - [github](https://github.com/kxrn0/)

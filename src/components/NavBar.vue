@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { computed, inject } from "vue";
-import { themeKey } from "@/injection_keys";
+import { computed } from "vue";
+import type useTheme from "@/composables/useTheme";
 import logoLight from "@/assets/images/logo-light-theme.svg";
 import logoDark from "@/assets/images/logo-dark-theme.svg";
 import IconMoon from "@/assets/images/icon-moon.svg";
 import IconSun from "@/assets/images/icon-sun.svg";
 
-const themeManager = inject(themeKey)!;
-const src = computed(() => (themeManager.theme.value === "light" ? logoLight : logoDark));
-const themeIcon = computed(() => (themeManager.theme.value === "light" ? IconMoon : IconSun));
+const props = defineProps<{
+  themeManager: ReturnType<typeof useTheme>;
+}>();
+const src = computed(() => (props.themeManager.theme.value === "light" ? logoLight : logoDark));
+const themeIcon = computed(() => (props.themeManager.theme.value === "light" ? IconMoon : IconSun));
 </script>
 
 <template>

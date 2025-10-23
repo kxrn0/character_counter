@@ -1,38 +1,31 @@
 <script setup lang="ts">
-import { ref, computed, inject } from "vue";
+import { ref, computed } from "vue";
+import type { Theme } from "@/types";
+import format_time from "./utils_textarea/format_time";
 import iconInfo from "@/assets/images/icon-info.svg";
-import { themeKey } from "@/injection_keys";
-import NumberInput from "./NumberInput.vue";
+import NumberInput from "./components_text_area/NumberInput.vue";
 
 const readingRate = 265; // words per minute
 const props = defineProps<{
   excludeSpaces: boolean;
   charCount: number;
   wordCount: number;
+  theme: Theme;
 }>();
 const emits = defineEmits<{
   (e: "toggle"): void;
 }>();
-const themeManager = inject(themeKey)!;
 const textModel = defineModel<string>();
 const setCharLimit = ref(false);
 const charLimit = ref<number | null>(2 ** 8);
 const exceedsCharLimit = computed(
   () => setCharLimit.value && charLimit.value !== null && props.charCount > charLimit.value,
 );
-const readingTime = computed(() => {
-  const time = Number((props.wordCount / readingRate).toFixed(2));
-
-  if (time === 0) return "0 minutes";
-  else if (time < 1) return "< 1 minute";
-  else if (time === 1) return `${time} minute`;
-
-  return `${time} minutes`;
-});
+const readingTime = computed(() => format_time(props.wordCount / readingRate));
 </script>
 
 <template>
-  <div class="text-area-container" :class="themeManager.theme.value">
+  <div class="text-area-container" :class="props.theme">
     <textarea v-model="textModel" :class="{ terrified: exceedsCharLimit }"></textarea>
     <div v-if="exceedsCharLimit" class="error">
       <img :src="iconInfo" alt="" />
@@ -49,7 +42,7 @@ const readingTime = computed(() => {
             <input type="checkbox" v-model="setCharLimit" />
             <span>Set character limit</span>
           </label>
-          <NumberInput v-if="setCharLimit" v-model="charLimit" />
+          <NumberInput v-if="setCharLimit" v-model="charLimit" :theme="props.theme" />
         </div>
       </div>
       <p>Approx. reading time: {{ readingTime }}</p>

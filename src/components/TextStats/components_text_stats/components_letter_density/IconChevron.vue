@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { themeKey } from "@/injection_keys";
-import { inject } from "vue";
+import type { Theme } from "@/types";
 
-const themeManager = inject(themeKey)!;
+const props = defineProps<{ theme: Theme }>();
 </script>
 
 <template>
   <svg
     class="icon"
-    :class="themeManager.theme.value"
+    :class="props.theme"
     width="11"
     height="7"
     viewBox="0 0 11 7"

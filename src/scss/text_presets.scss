@@ -65,3 +65,11 @@
   line-height: 130%;
   letter-spacing: -0.0375rem;
 }
+
+@mixin text-preset-6 {
+  font-family: dm-sans;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 130%;
+  letter-spacing: -0.0375rem;
+}

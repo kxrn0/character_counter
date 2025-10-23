@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { themeKey } from "@/injection_keys";
-import { computed, inject, ref } from "vue";
-import IconChevron from "./IconChevron.vue";
+import { computed, ref } from "vue";
+import type { Theme } from "@/types";
+import compute_density from "./utils_letter_density/compute_density";
+import IconChevron from "./components_letter_density/IconChevron.vue";
 
 const props = defineProps<{
   text: string;
+  theme: Theme;
 }>();
 const letterDensity = computed(() => {
   const densities = compute_density(props.text);
   const totalLetters = densities.reduce((total, current) => total + current[1], 0);
   const updated = densities.map((density) => ({
-    letter: density[0].toUpperCase(),
+    letter: density[0],
     count: density[1],
     percentage: `${((100 * density[1]) / totalLetters).toFixed(2)}%`,
   }));
@@ -25,44 +27,28 @@ const lastIndex = computed(() => {
 
   return Math.min(index, totalLength);
 });
-const themeManager = inject(themeKey)!;
-
-function compute_density(text: string) {
-  const counts = new Map<string, number>();
-
-  for (const char of text) {
-    if (/[a-z]/i.test(char) === false) continue;
-
-    const count = counts.get(char) || 0;
-
-    counts.set(char, count + 1);
-  }
-
-  return Array.from(counts).sort((a, b) => b[1] - a[1]);
-}
+const displayedDensities = computed(() => letterDensity.value.slice(0, lastIndex.value));
 </script>
 
 <template>
-  <div class="densities-container" :class="themeManager.theme.value">
+  <div class="densities-container" :class="props.theme">
     <p class="title">Letter Density</p>
     <p class="empty" v-if="letterDensity.length === 0">
       No characters found. Start typing to see letter density.
     </p>
     <template v-else>
       <ul class="bars">
-        <li v-for="idx in lastIndex" :key="letterDensity[idx]?.letter" class="letter-details">
-          <span class="letter">{{ letterDensity[idx - 1]?.letter }}</span>
-          <span class="bar" :style="{ '--percentage': letterDensity[idx - 1]?.percentage }"></span>
-          <span class="percentage"
-            >{{ letterDensity[idx - 1]?.count }} ({{ letterDensity[idx - 1]?.percentage }})</span
-          >
+        <li v-for="density in displayedDensities" :key="density.letter" class="letter-details">
+          <span class="letter">{{ density.letter }}</span>
+          <span class="bar" :style="{ '--percentage': density.percentage }"></span>
+          <span class="percentage">{{ density.count }} ({{ density.percentage }})</span>
         </li>
       </ul>
       <label v-if="letterDensity.length > defaultLength" class="toggle-container">
         <span>See {{ showAll ? "less" : "more" }}</span>
         <span class="check-container">
           <input type="checkbox" v-model="showAll" />
-          <IconChevron />
+          <IconChevron :theme="props.theme" />
         </span>
       </label>
     </template>

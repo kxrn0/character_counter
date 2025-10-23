@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { themeKey } from "@/injection_keys";
-import { inject } from "vue";
+import type { Theme } from "@/types";
 
+const props = defineProps<{ theme: Theme }>();
 const inputModel = defineModel<number | null>();
-const themeManager = inject(themeKey)!;
 
 function handle_input(event: Event) {
   const target = event.target as HTMLInputElement;
@@ -36,7 +35,7 @@ function handle_key_down(event: KeyboardEvent) {
 </script>
 
 <template>
-  <label class="number-input-label" :class="themeManager.theme.value" :data-value="inputModel">
+  <label class="number-input-label" :class="props.theme" :data-value="inputModel">
     <span class="screen-reader-only">Limit amount</span>
     <input
       type="text"
