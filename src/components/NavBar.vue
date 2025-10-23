@@ -12,9 +12,9 @@ const themeIcon = computed(() => (themeManager.theme.value === "light" ? IconMoo
 </script>
 
 <template>
-  <nav :class="themeManager.theme.value">
-    <img :src alt="character counter logo" />
-    <button @click="themeManager.toggle_theme">
+  <nav class="navbar" :class="themeManager.theme.value">
+    <img :src alt="character counter logo" class="app-logo" />
+    <button @click="themeManager.toggle_theme" class="toggle">
       <img :src="themeIcon" alt="" />
     </button>
   </nav>
@@ -22,8 +22,9 @@ const themeIcon = computed(() => (themeManager.theme.value === "light" ? IconMoo
 
 <style scoped lang="scss">
 @use "@/scss/radii";
+@use "@/scss/variables";
 
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
 
@@ -35,7 +36,15 @@ nav {
     --button-bg: var(--neutral-700);
   }
 
-  button {
+  .app-logo {
+    width: 15.3125rem;
+  }
+
+  width: 100%;
+  max-width: 61.875rem;
+  padding-top: 2rem;
+
+  .toggle {
     @include radii.radius-8;
 
     background: var(--button-bg);
@@ -48,6 +57,32 @@ nav {
     img {
       width: 1.375rem;
       height: 1.375rem;
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-tablet) {
+    padding: 1rem 2rem;
+  }
+
+  @media (max-width: variables.$breakpoint-tablet-small) {
+    .app-logo {
+      width: 11.525rem;
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-mobile) {
+    padding: 1rem;
+
+    .toggle {
+      @include radii.radius-6;
+
+      width: 2rem;
+      height: 2rem;
+
+      img {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
   }
 }

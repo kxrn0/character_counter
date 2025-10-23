@@ -17,7 +17,7 @@ function count_chars(text: string, excludeSpaces: boolean) {
 
   let count = 0;
 
-  for (const char of text) if (char != " ") count++;
+  for (const char of text) if (/\s/.test(char) === false) count++;
 
   return count;
 }
@@ -30,9 +30,13 @@ provide(themeKey, themeManager);
 </script>
 
 <template>
+  <Navbar />
   <main class="app-container" :class="themeManager.theme.value">
-    <Navbar />
-    <h1>Analyze your text in real-time.</h1>
+    <h1 class="title">
+      Analyze your text <br class="brazil-desktop" />
+      in <br class="brazil-mobile" />
+      real-time.
+    </h1>
     <TextArea
       v-model="text"
       :char-count
@@ -46,6 +50,7 @@ provide(themeKey, themeManager);
 
 <style scoped lang="scss">
 @use "@/scss/text_presets";
+@use "@/scss/variables";
 
 .app-container {
   &.light {
@@ -56,17 +61,58 @@ provide(themeKey, themeManager);
     --header-color: var(--neutral-100);
   }
 
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  padding: 2rem 0 4rem 0;
+  width: fit-content;
 
-  h1 {
+  .title {
     @include text_presets.text-preset-1;
 
+    text-wrap: balance;
     color: var(--header-color);
-    width: 31.875rem;
+    align-self: center;
+    width: 35rem;
     text-align: center;
+
+    .brazil-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-tablet) {
+    margin-top: 1.5rem;
+    padding: 0 0 5.875rem 0;
+    gap: 2.5rem;
+  }
+
+  @media (max-width: variables.$breakpoint-tablet-small) {
+    padding: 0 0 2rem 0;
+
+    .title {
+      @include text_presets.text-preset-1-mobile;
+
+      width: 21.5rem;
+
+      .brazil-desktop {
+        display: none;
+      }
+
+      .brazil-mobile {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-mobile) {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  @media (max-width: variables.$breakpoint-mobile-small) {
+    .title {
+      width: 100%;
+    }
   }
 }
 </style>

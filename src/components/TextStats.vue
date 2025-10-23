@@ -46,8 +46,13 @@ const sentenceCount = computed(() =>
 <style scoped lang="scss">
 @use "@/scss/text_presets";
 @use "@/scss/radii";
+@use "@/scss/variables";
 
 .stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
   .cards {
     display: flex;
     gap: 1rem;
@@ -57,11 +62,11 @@ const sentenceCount = computed(() =>
 
       color: var(--neutral-900);
       width: 20rem;
-      padding: 1.65625rem 1rem;
+      padding: 1.5rem 1rem;
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 0.3125rem;
+      gap: 0.5rem;
       overflow: hidden;
 
       &.char {
@@ -80,18 +85,62 @@ const sentenceCount = computed(() =>
         width: 9.375rem;
         height: 9.375rem;
         position: absolute;
-        top: 0;
+        top: 50%;
         left: 12.5rem;
+        transform: translateY(-50%);
       }
 
       .title {
         @include text_presets.text-preset-1;
+
         z-index: 2;
       }
 
       .subtitle {
         @include text_presets.text-preset-3;
+
         z-index: 2;
+      }
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-tablet) {
+    .cards {
+      .card {
+        width: 14rem;
+        padding: 1.5rem 0.75rem;
+
+        .decorative-image {
+          left: 9rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-tablet-small) {
+    .cards {
+      align-items: center;
+      flex-direction: column;
+
+      .card {
+        width: 21.5rem;
+        padding: 1.75rem 1.25rem;
+
+        .decorative-image {
+          left: 15.25rem;
+        }
+
+        .title {
+          @include text_presets.text-preset-1-mobile;
+        }
+      }
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-mobile-small) {
+    .cards {
+      .card {
+        width: 100%;
       }
     }
   }

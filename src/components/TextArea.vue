@@ -4,7 +4,7 @@ import iconInfo from "@/assets/images/icon-info.svg";
 import { themeKey } from "@/injection_keys";
 import NumberInput from "./NumberInput.vue";
 
-const readingRate = 250; // words per minute
+const readingRate = 265; // words per minute
 const props = defineProps<{
   excludeSpaces: boolean;
   charCount: number;
@@ -60,6 +60,7 @@ const readingTime = computed(() => {
 <style scoped lang="scss">
 @use "@/scss/text_presets";
 @use "@/scss/radii";
+@use "@/scss/variables";
 
 .text-area-container {
   &.light {
@@ -149,6 +150,7 @@ const readingTime = computed(() => {
         display: flex;
         align-items: center;
         gap: 0.625rem;
+        height: 2rem;
 
         input[type="checkbox"] {
           @include radii.radius-4;
@@ -188,6 +190,20 @@ const readingTime = computed(() => {
         display: flex;
         align-items: center;
         gap: 0.625rem;
+      }
+    }
+  }
+
+  @media (max-width: variables.$breakpoint-tablet-small) {
+    .controls {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+
+      .checkboxes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
       }
     }
   }

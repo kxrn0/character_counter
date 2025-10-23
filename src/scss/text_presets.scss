@@ -1,7 +1,7 @@
 @supports (font-variation-settings: normal) {
   @font-face {
     font-family: dm-sans;
-    src: url("../assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
+    src: url("@/assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf");
     font-weight: 100 1000;
   }
 }
@@ -9,19 +9,19 @@
 @supports not (font-variation-settings: normal) {
   @font-face {
     font-family: dm-sans;
-    src: url("../assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
+    src: url("@/assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
     font-weight: 400;
   }
 
   @font-face {
     font-family: dm-sans;
-    src: url("../assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
+    src: url("@/assets/fonts/DM_Sans/static/DMSans-Regular.ttf");
     font-weight: 600;
   }
 
   @font-face {
     font-family: dm-sans;
-    src: url("../assets/fonts/DM_Sans/static/DMSans-Bold.ttf");
+    src: url("@/assets/fonts/DM_Sans/static/DMSans-Bold.ttf");
     font-weight: 700;
   }
 }

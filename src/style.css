@@ -28,11 +28,11 @@
 }
 
 :root.light {
-  --background-texture: url("./assets/images/bg-light-theme.png");
+  --background-texture: url("@/assets/images/bg-light-theme.png");
 }
 
 :root.dark {
-  --background-texture: url("./assets/images/bg-dark-theme.png");
+  --background-texture: url("@/assets/images/bg-dark-theme.png");
 }
 
 body {
@@ -41,4 +41,11 @@ body {
   background-position: center;
   display: grid;
   place-items: center;
+}
+
+#app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
